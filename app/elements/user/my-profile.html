@@ -1,0 +1,37 @@
+<dom-module id="my-profile">
+  <style>
+   /* :host {
+      display: block;
+    }*/
+  </style>
+  
+  <template>
+    <p class="">profile:  <span>{{name}}</span></p>
+    <p class="">land in personal scientists page</p>  
+  </template>
+
+  <script>
+    (function () {
+      Polymer({
+        is: 'my-profile',
+        properties: {
+          name: {
+            type: String,
+            notify: true,
+          }
+        },
+        // ready: function() {
+        //   this.items = [
+        //     'Responsive Web App boilerplate',
+        //     'Iron Elements and Paper Elements',
+        //     'End-to-end Build Tooling (including Vulcanize)',
+        //     'Unit testing with Web Component Tester',
+        //     'Routing with Page.js',
+        //     'Offline support with the Platinum Service Worker Elements'
+        //   ];
+        // }
+      });
+    })();
+  </script>
+
+</dom-module>

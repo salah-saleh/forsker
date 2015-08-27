@@ -1,0 +1,29 @@
+<dom-module id="my-keyword-essentials">
+  <template>
+    <firebase-document 
+      location="{{_keywordUrl(keywordId)}}"
+      data="{{keyword}}">
+    </firebase-document>
+    
+    <a href="[[_itemUrl(keyword)]]"><span>[[keyword.name]]</span></a>
+  </template>
+
+  <script>
+    (function () {
+      Polymer({ 
+        is: 'my-keyword-essentials',
+        _keywordUrl: function(id) {
+          return 'https://radiant-fire-9062.firebaseio.com/keywords/' + id;
+        }, 
+        _itemUrl: function(obj) {
+          return '/keyword/' + obj.name + '/' + this.keywordId;
+        },              
+        properties: {
+          keywordId:{
+            type: String,
+          },
+        },
+      });
+    })();
+  </script>
+</dom-module>

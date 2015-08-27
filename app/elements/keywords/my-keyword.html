@@ -1,0 +1,30 @@
+<dom-module id="my-keyword">
+  
+  <template>
+    <firebase-document 
+      location="{{_keywordUrl(keywordId)}}"
+      data="{{keyword}}">
+    </firebase-document>
+
+    <p class="">keyword:  <span>[[keyword.name]]</span></p>
+    <p class="">#followers: <span>[[keyword.followers]]</span></p>
+    <p class=""> list of linked: groups/scientists etc.</p>  
+  </template>
+
+  <script>
+    (function () {
+      Polymer({
+        is: 'my-keyword',
+        _keywordUrl: function(id){
+          return 'https://radiant-fire-9062.firebaseio.com/keywords/' + id;
+        },
+        properties: {
+          keywordId: {
+            type: String,
+          },
+        },
+      });
+    })();
+  </script>
+
+</dom-module>

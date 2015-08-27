@@ -23,25 +23,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app.route = 'positions';
     });
 
-   page('/positions/:position', function (data) {
+   page('/position/:name/:id', function (data) {
       app.route = 'position';
       app.params = data.params;
     });  
-    
-   page('/events', function () {
-      app.route = 'events';
+
+   page('/position/:name/:id/edit', function (data) {
+      app.route = 'position'; // should be changed if I decided to use another element, if so, also add a new section in the index.html
+      app.params = data.params;
     });
 
-    page('/events/:event', function (data) {
-      app.route = 'event';
-      app.params = data.params;
-    });  
+    page('/positions/create', function () {
+      app.route = 'positionCreate';
+    });   
+
+   // page('/events', function () {
+   //    app.route = 'events';
+   //  });
+
+   //  page('/event/:name/:id', function (data) {
+   //    app.route = 'event';
+   //    app.params = data.params;
+   //  });  
 
    page('/groups', function () {
       app.route = 'groups';
     });
 
-   page('/groups/:group', function (data) {
+   page('/group/:name/:id', function (data) {
       app.route = 'group';
       app.params = data.params;
     }); 
@@ -50,12 +59,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app.route = 'scientists';
     });
 
-   page('/scientists/:scientist', function (data) {
+   page('/scientist/:name/:id', function (data) {
       app.route = 'scientist';
       app.params = data.params;
     }); 
 
-   page('/profile/:scientist', function (data) {
+   page('/profile/:name/:id', function (data) {
       app.route = 'profile';
       app.params = data.params;
     });
@@ -64,17 +73,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app.route = 'keywords';
     });
 
-   page('/keywords/:keyword', function (data) {
+   page('/keyword/:name/:id', function (data) {
       app.route = 'keyword';
       app.params = data.params;
     }); 
 
-   
-
-
- 
-
- 
 
     // add #! before urls
     page({

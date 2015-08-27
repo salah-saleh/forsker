@@ -1,0 +1,38 @@
+<dom-module id="my-group">
+  
+  <template>
+    <firebase-document 
+      location="{{_groupUrl(groupId)}}"
+      data="{{group}}">
+    </firebase-document>
+
+    <my-group-essentials group-id="[[group.__firebaseKey__]]" keywords-ids="[[group.keywordsIds]]"></my-group-essentials>
+    <p class="">#followers: <span>[[group.followers]]</span></p>
+    <p class="">follow/unfollow</p>
+    <p class="">short bio: <span>[[group.followers]]</span></p>
+    <p class="">address: <span>[[group.followers]]</span></p>
+    <p class="">website: <span>[[group.followers]]</span></p>
+    <p class="">contact person: <span>[[group.followers]]</span></p>
+    <p class="">list of events/positions/scientists</p>
+    <p class="">follow/unfollow</p>
+    <p class="">#followers: <span>[[group.followers]]</span></p>   
+    <p class="">request to join/unjoin</p>
+  </template>
+
+  <script>
+    (function () {
+      Polymer({
+        is: 'my-group',
+        _groupUrl: function(id){
+          return 'https://radiant-fire-9062.firebaseio.com/groups/' + id;
+        },   
+        properties: {
+          groupId: {
+            type: String,
+          },
+        },
+      });
+    })();
+  </script>
+
+</dom-module>

@@ -1,0 +1,25 @@
+<dom-module id="my-groups-list">
+  
+  <template>
+    <firebase-collection data="{{groups}}"
+                        location="https://radiant-fire-9062.firebaseio.com/groups">
+    </firebase-collection>
+
+    <template is="dom-repeat" items="[[groups]]" as="group"> 
+      <p>Element: <span>[[index]]</span></p>
+      <my-group-essentials group-id="[[group.__firebaseKey__]]" keywords-ids="[[group.keywordsIds]]"></my-group-essentials>
+      <p class="">#followers: <span>[[group.followers]]</span></p>
+      <p class="">follow/unfollow</p>
+      <p>//////////////////////////////</p>
+    </template>
+  </template>
+
+  <script>
+    (function () {
+      Polymer({
+        is: 'my-groups-list', 
+      });
+    })();
+  </script>
+
+</dom-module>

@@ -1,0 +1,35 @@
+<dom-module id="my-scientist">
+
+  <template>
+    <firebase-document 
+      location="{{_scientistUrl(scientistId)}}"
+      data="{{scientist}}">
+    </firebase-document>
+
+    <p class="">first name:  <span>[[scientist.firstName]]</span></p>
+    <p class="">last name:  <span>[[scientist.lastName]]</span></p>
+    <my-group-essentials group-id="[[scientist.groupId]]" keywords-ids="[[scientist.keywordsIds]]"></my-group-essentials>
+    <p class="">short bio:  <span>[[scientist.bio]]</span></p>
+    <p class="">email: <span>[[scientist.email]]</span></p>
+    <p class="">telephone: <span>[[scientist.telephone]]</span></p>
+    <p class="">website:  <span>[[scientist.website]]</span></p>
+    <p class="">linkedin profil:  <span>[[scientist.linkedin]]</span></p>    
+  </template>
+
+  <script>
+    (function () {
+      Polymer({
+        is: 'my-scientist',
+        _scientistUrl: function(id){
+          return 'https://radiant-fire-9062.firebaseio.com/users/' + id;
+        },        
+        properties: {
+          scientistId: {
+            type: String,
+          },
+        },
+      });
+    })();
+  </script>
+
+</dom-module>

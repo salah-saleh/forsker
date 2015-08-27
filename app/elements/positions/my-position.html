@@ -1,0 +1,37 @@
+<dom-module id="my-position">
+  
+  <template>
+    <firebase-document 
+      location="{{_positionUrl(positionId)}}"
+      data="{{position}}">
+    </firebase-document>
+
+    <p class="">title: <span>[[position.name]]</span></p>
+    <p class="">describtion: <span>[[position.describtion]]</span> </p>
+    <my-group-essentials group-id="[[position.groupId]]" keywords-ids="[[position.keywordsIds]]"></my-group-essentials>
+    <p class="">deadline: <span>[[position.deadline]]</span></p>
+    <p class="">contact person name: <span>[[position.contactPersonName]]</span></p>
+    <p class="">contact person email: <span>[[position.contactPersonEmail]]</span></p>
+    <p class="">contact person tele: <span>[[position.contactPersonTele]]</span></p>
+    <p class="">status: <span>[[position.status]]</span></p>
+    <p> button save: save position into the user list</p>
+    <!-- future to accept attachments, maybe through google docs -->
+  </template>
+
+  <script>
+    (function () {
+      Polymer({
+        is: 'my-position',
+        _positionUrl: function(id){
+          return 'https://radiant-fire-9062.firebaseio.com/positions/' + id;
+        },
+        properties: {
+          positionId: {
+            type: String,
+          },
+        },
+      });
+    })();
+  </script>
+
+</dom-module>

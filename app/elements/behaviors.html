@@ -1,0 +1,69 @@
+<!-- <script>
+	var MyBehaviors = MyBehaviors || {};
+
+	MyBehaviors.ComputeUrl = {
+
+		_computeUrl: function(base, ext){
+          return base + ext;
+        },
+
+        _getperson: function(id) {}, 
+        
+        
+	};
+	MyBehaviors.ComputeLink = {
+		_computeLink: function(base, obj){
+          return base + obj.name + '/' + obj.__firebaseKey__;
+      	},
+	};
+	MyBehaviors.GroupGetters = {
+		_getGroupName: function(obj) {
+        	var ref = new Firebase("https://radiant-fire-9062.firebaseio.com/groups/" + obj.groupId);
+        	var elem = this.$.gName;
+        	ref.on('value', function(snapshot) {
+					elem.textContent = snapshot.val().name;
+				}, function (errorObject) {
+				  console.log("The read failed: " + errorObject.code);
+				}
+			);
+        }, 
+		_getGroupUniversity: function(obj) {
+			var ref = new Firebase("https://radiant-fire-9062.firebaseio.com/groups/" + obj.groupId);
+        	var elem = this.$.gUni;
+        	ref.on('value', function(snapshot) {
+					elem.textContent = snapshot.val().university;
+				}, function (errorObject) {
+				  console.log("The read failed: " + errorObject.code);
+				}
+			);
+		}, 
+		
+
+	};
+	MyBehaviors.KeywordsGetters = {
+		_getKeywords: function(obj) {
+			var elem = this.$.gKeywords;
+			var ref = {};
+			var myObjAsArr = obj.keywordsIds.split(',');
+			var flagFirstTimeLoop = true;
+			for (var i = myObjAsArr.length - 1; i >= 0; i--) {
+				ref = new Firebase("https://radiant-fire-9062.firebaseio.com/keywords/" + myObjAsArr[i]);
+	        	ref.on('value', function(snapshot) {
+	        			if (flagFirstTimeLoop) {
+							elem.textContent = snapshot.val().name;
+							flagFirstTimeLoop = false;
+	        			} else{
+							elem.textContent = elem.textContent + ', ' + snapshot.val().name;
+	        			};
+					}, function (errorObject) {
+					  console.log("The read failed: " + errorObject.code);
+					}
+				);
+			};
+			
+		}, 
+	};
+	// MyBehaviors.ComputeUrl = {};
+
+
+</script> -->

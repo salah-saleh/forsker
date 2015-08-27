@@ -80,10 +80,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <span>Open Positions</span>
           </a>
 
-          <a data-route="events" href="/events">
+          <!-- <a data-route="events" href="/events">
             <iron-icon icon="my-alt-icons:event-note"></iron-icon>
             <span>Upcoming Events</span>
-          </a>
+          </a> -->
 
           <a data-route="groups" href="/groups">
             <iron-icon icon="my-svg-icons:people"></iron-icon>
@@ -102,6 +102,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           <a data-route="profile" href="/profile">
           </a>
+
+          <!-- <a data-route="positionCreate" href="/positions/create">
+          </a> -->
         </paper-menu>
       </paper-scroll-header-panel>
 
@@ -141,122 +144,74 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <section data-route="positions">
               <paper-material elevation="1">
-                <p class="">position title</p>
-                <p class="">group/uni</p>
-                <p class="">deadline</p>
-                <p class="">keywords</p>
-                <a href="/positions/phd-economics">phd-economics</a> 
+                <my-positions-list></my-positions-list>
               </paper-material>
             </section>
 
             <section data-route="position">
               <paper-material elevation="1">
-                <p class="">title: <span>{{params.position}}</span></p>
-                <p class="">describtion</p>
-                <p class="">group/uni</p>
-                <p class="">deadline</p>
-                <p class="">contact person</p>
-                <p class="">keywords</p>
-                <p class="">status</p>
+                <my-position position-id="{{params.id}}" id="my-position" idf></my-position>
               </paper-material>
             </section>
 
-            <section data-route="events">
+            <section data-route="positionCreate">
               <paper-material elevation="1">
-                <p class="">event name</p>
-                <p class="">group name</p>
-                <p class="">group university</p>
-                <p class="">start date</p>
-                <p class="">end date</p>
-                <p class="">keywords</p>
-                <p class="">#views</p>
-                <a href="/events/conference-hpc">conference-hpc</a> 
+                <my-position-create></my-position-create>
+              </paper-material>
+            </section>
+
+            <!-- <section data-route="events">
+              <paper-material elevation="1">
+                <my-events-list></my-events-list>
               </paper-material>
             </section>
 
             <section data-route="event">
               <paper-material elevation="1">
-                <p class="">event name:  <span>{{params.event}}</span></p>
-                <p class="">group name</p>
-                <p class="">group university</p>
-                <p class="">start date</p>
-                <p class="">end date</p>
-                <p class="">short descrintion</p>
-                <p class="">keywords</p>
-                <p class="">contact person</p>
+                <my-event event-id="{{params.id}}"></my-event>
               </paper-material>
-            </section>
+            </section> -->
 
             <section data-route="groups">
               <paper-material elevation="1">
-                <p class="">group name</p>
-                <p class="">group university</p>
-                <p class="">group research keywords</p>
-                <p class="">follow/unfollow</p>
-                <p class="">#followers</p>
-                <a href="/groups/group-hpc">group-hpc</a> 
+                <my-groups-list></my-groups-list>
               </paper-material>
             </section>
 
             <section data-route="group">
               <paper-material elevation="1">
-                <p class="">group name:  <span>{{params.group}}</span></p>
-                <p class="">group university</p>
-                <p class="">short bio</p>
-                <p class="">group research keywords</p>
-                <p class="">address</p>
-                <p class="">website</p>
-                <p class="">contact person</p>
-                <p class="">list of events/positions/scientists</p>
-                <p class="">follow/unfollow</p>
-                <p class="">#followers</p>
+                <my-group group-id="{{params.id}}"></my-group>
               </paper-material>
             </section>
 
             <section data-route="scientists">
               <paper-material elevation="1">
-                <p class="">first last name</p>
-                <p class="">group</p>
-                <p class="">university</p>
-                <p class="">research interests</p>
-                <a href="/scientists/georg">georg</a> 
-                <a href="/profile/georg">profile of georg</a> 
+                <my-scientists-list></my-scientists-list>
               </paper-material>
             </section>
 
             <section data-route="scientist">
               <paper-material elevation="1">
-                <p class="">first/last name:  <span>{{params.scientist}}</span></p>
-                <p class="">group</p>
-                <p class="">univversity</p>
-                <p class="">short bio</p>
-                <p class="">research interests</p>
-                <p class="">contact info: email / telephone / website</p>
-                <p class="">linkedin</p>
+                <my-scientist scientist-id="{{params.id}}"></my-scientist>
               </paper-material>
             </section>
 
             <!-- editing personal info -->
             <section data-route="profile">
               <paper-material elevation="1">
-                <p class="">profile:  <span>{{params.scientist}}</span></p>
-                <p class="">land in personal scientists page</p>
+                <my-profile profile-id="{{params.id}}"></my-profile>
               </paper-material>
             </section>
 
             <section data-route="keywords">
               <paper-material elevation="1">
-                <p class="">keyword</p>
-                <p class="">#followers</p>
-                <a href="/keywords/hpc">hpc</a> 
+                <my-keywords-list></my-keywords-list>
               </paper-material>
             </section>
 
             <section data-route="keyword">
               <paper-material elevation="1">
-                <p class="">keyword:  <span>{{params.keyword}}</span></p>
-                <p class="">#followers</p>
-                <p class=""> list of linked: groups/scientists etc.</p>
+                <my-keyword keyword-id="{{params.id}}"></my-keyword>
               </paper-material>
             </section>
           </iron-pages>

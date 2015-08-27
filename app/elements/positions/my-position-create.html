@@ -1,0 +1,116 @@
+<dom-module id="my-position-create">
+  <style>
+   /* :host {
+      display: block;
+    }*/
+  </style>
+
+  <template> 
+    <firebase-collection id="firebaseCollc" data location order-by-child equal-to query>
+    </firebase-collection>
+
+<!-- always save everything lowercase and then capitalize, easier for sarching -->
+
+    <form id="createPosition">
+      <input is="iron-input" type="" id="name" placeholder="name here...">
+      <input is="iron-input" type="" id="describtion" placeholder="describtion here...">
+      <input is="iron-input" type="date" id="deadline" placeholder="deadline here...">
+      <!-- later: choice from person inside the group -->
+      <input is="iron-input" type="" id="contactPersonName" placeholder="contactPerson name here...">
+      <input is="iron-input" type="" id="contactPersonEmail" placeholder="contactPerson email here...">
+      <input is="iron-input" type="" id="contactPersonTele" placeholder="contactPerson tele here...">
+      <!-- choice from keywords registered with the group/ by default all selected -->
+      <p>Choose from default group keywords or customize</p>
+      <input is="iron-input" type="" id="keywords" placeholder="keywords here..."> 
+      <!-- choice: open, on hold, closed -->
+      <input is="iron-input" type="" id="status" placeholder="status here...">
+
+      <!-- future to accept attachments, maybe through google docs --> 
+    </form>
+    <paper-button on-click="submitPosition">submit</paper-button>
+  </template>
+
+  <script>
+    (function () {
+      Polymer({
+        is: 'my-position-create',
+        // output: function(profile) {
+        //   return JSON.stringify(profile)
+        // },
+
+        properties: {
+          position: {
+            type: Object,
+            // value: {},
+            // notify: true
+          }
+        },
+        submitPosition: function() {
+          // check if the user is logged in
+          // check if the user is already in a group
+          // server: check the group id submited = groupId of the user 
+
+          if (!this.$.name.value.length) {
+            alert('Please write a name.');
+            return;
+          }
+
+          var uid = '0';
+          this.$.firebaseCollc.location = 'https://radiant-fire-9062.firebaseio.com/users/' + uid;
+          this.position.groupId = this.$.firebaseCollc.data.groupId;
+
+          
+          this.$.firebaseCollc.location = 'https://radiant-fire-9062.firebaseio.com/keywords/'; 
+          this.$.firebaseCollc['order-by-child'] = 'name';
+
+          var keywordObj = {};
+          var myKeywordsArr = this.$.keywords.value.split(',');
+
+          for (var i = myKeywordsArr.length - 1; i >= 0; i--) {
+            this.$.firebaseCollc['equal-to'] = myKeywordsArr[i];
+            keywordObj = this.$.firebaseCollc.query;
+            console.log(JSON.stringify(keywordObj));
+
+            if (! this.$.firebaseCollc.query.name) { // if the keyword doesn't exist
+              keywordObj = this.$.firebaseCollc.add(myKeywordsArr[i]);
+            }
+
+            this.position.keywordsIds += keywordObj.__firebaseKey__;
+          };
+          // get user.groupId
+            // set this.position.groupId to it 
+          // get the written keywords
+          // search in the keywords database
+            // if found, just add a ref to the position
+            // else create it, and then add a ref to the position 
+
+          this.position = {
+            name: this.$.name.value,
+            describtion: this.$.describtion.value,
+            deadline: this.$.deadline.value,
+            contactPersonName: this.$.contactPersonName.value,
+            contactPersonEmail: this.$.contactPersonEmail.value,
+            contactPersonTele: this.$.contactPersonTele.value,
+            status: this.$.status.value,
+          };
+          this.$.firebaseCollc.location = 'https://radiant-fire-9062.firebaseio.com/positions/'; 
+          var savedPosition = this.$.firebaseCollc.add(this.position);
+          console.log(savedPosition);
+
+          this.$.firebaseCollc.location = 'https://radiant-fire-9062.firebaseio.com/keywords/' + keywordObj.__firebaseKey__; 
+          this.$.firebaseCollc.data.positionsIds += savedPosition.__firebaseKey__;
+
+          this.$.name.value = '';
+          this.$.describtion.value = '';
+          this.$.deadline.value = '';
+          this.$.contactPersonName.value = '';
+          this.$.contactPersonEmail.value = '';
+          this.$.contactPersonTele.value = '';
+          this.$.keywords.value = '';
+          this.$.status.value = '';
+        },
+      });
+    })();
+  </script>
+
+</dom-module>

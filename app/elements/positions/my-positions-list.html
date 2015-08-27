@@ -1,0 +1,29 @@
+<dom-module id="my-positions-list">
+  
+  <template>
+    <firebase-collection data="{{positions}}"
+                        location="https://radiant-fire-9062.firebaseio.com/positions">
+    </firebase-collection>
+
+    <template is="dom-repeat" items="[[positions]]" as="position"> 
+      <p>Element: <span>[[index]]</span></p>
+      <a href="[[_itemUrl(position)]]"><span>[[position.name]]</span></a> 
+      <my-group-essentials group-id="[[position.groupId]]" keywords-ids="[[position.keywordsIds]]"></my-group-essentials>
+      <p class="">deadline: <span>[[position.deadline]]</span> </p>
+      <p class="">deadline: <span>[[position.status]]</span> </p>
+      <p> button save: save position into the user list</p>
+      <p>//////////////////////////////</p>
+    </template>
+  </template>
+
+  <script>
+    (function () {
+      Polymer({
+        is: 'my-positions-list',
+        _itemUrl: function(obj) {
+          return '/position/' + obj.name.replace(/ /g, '') + '/' + obj.__firebaseKey__;
+        },
+      });
+    })();
+  </script>
+</dom-module>

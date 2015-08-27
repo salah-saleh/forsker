@@ -1,0 +1,27 @@
+<dom-module id="my-keywords-list">
+  
+  <template>
+    <firebase-collection data="{{keywords}}"
+                        location="https://radiant-fire-9062.firebaseio.com/keywords">
+    </firebase-collection>
+
+    <template is="dom-repeat" items="[[keywords]]" as="keyword"> 
+      <a href="[[_itemUrl(keyword)]]"><span>[[keyword.name]]</span></a>
+      <p class="">#followers: <span>[[keyword.followers]]</span></a></p> 
+      <p class="">follow/unfollow</p>
+      <p>//////////////////////////////</p>
+    </template>
+  </template>
+
+  <script>
+    (function () {
+      Polymer({
+        is: 'my-keywords-list',
+        _itemUrl: function(obj) {
+          return '/keyword/' + obj.name + '/' + obj.__firebaseKey__;
+        }, 
+      });
+    })();
+  </script>
+
+</dom-module>

@@ -1,0 +1,52 @@
+<dom-module id="my-group-essentials">
+  
+  <template>
+    <firebase-document 
+      location="{{_groupUrl(groupId)}}"
+      data="{{group}}">
+    </firebase-document>
+    <firebase-document 
+      location="{{_universityUrl(group)}}"
+      data="{{university}}">
+    </firebase-document>    
+
+    <p class="">group name: <a href="[[_itemUrl(group)]]"><span>[[group.name]]</span></a> </p>
+    <p class="">uni: <a href="[[_itemUrl2(group, university)]]"><span>[[university.name]]</span></a> </p>
+    <p>Keywords: 
+      <template is="dom-repeat" items="[[_toArray(keywordsIds)]]" as="keywordId"> 
+        <my-keyword-essentials keyword-id="[[keywordId]]"></my-keyword-essentials>
+      </template>
+    </p>
+  </template>
+
+  <script>
+    (function () {
+      Polymer({
+        is: 'my-group-essentials',
+        _groupUrl: function(id) {
+          return 'https://radiant-fire-9062.firebaseio.com/groups/' + id;
+        },
+        _universityUrl: function(g) {
+          return 'https://radiant-fire-9062.firebaseio.com/universities/' + g.universityId;
+        },
+        _toArray: function(str) {
+          return  str.split(',');
+        },  
+        _itemUrl: function(obj) { 
+          return '/group/' + obj.name.replace(/ /g, '') + '/' + this.groupId;
+        },    
+        _itemUrl2: function(g,u) { 
+          return '/universites/' + u.name.replace(/ /g, '') + '/' + g.universityId;
+        },              
+        properties: {
+          groupId:{
+            type: String,
+          },
+          keywordsIds:{
+            type: String,
+          },
+        },
+      });
+    })();
+  </script>
+</dom-module>
